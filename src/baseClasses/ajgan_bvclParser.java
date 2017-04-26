@@ -1,3 +1,4 @@
+package baseClasses;
 // Generated from ajgan_bvcl.g4 by ANTLR 4.4
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -81,6 +82,11 @@ public class ajgan_bvclParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ajgan_bvclListener ) ((ajgan_bvclListener)listener).exitGoal(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ajgan_bvclVisitor ) return ((ajgan_bvclVisitor<? extends T>)visitor).visitGoal(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final GoalContext goal() throws RecognitionException {
@@ -139,6 +145,11 @@ public class ajgan_bvclParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ajgan_bvclListener ) ((ajgan_bvclListener)listener).exitMainClass(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ajgan_bvclVisitor ) return ((ajgan_bvclVisitor<? extends T>)visitor).visitMainClass(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -208,6 +219,11 @@ public class ajgan_bvclParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ajgan_bvclListener ) ((ajgan_bvclListener)listener).exitClassDeclaration(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ajgan_bvclVisitor ) return ((ajgan_bvclVisitor<? extends T>)visitor).visitClassDeclaration(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -289,6 +305,11 @@ public class ajgan_bvclParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ajgan_bvclListener ) ((ajgan_bvclListener)listener).exitVarDeclaration(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ajgan_bvclVisitor ) return ((ajgan_bvclVisitor<? extends T>)visitor).visitVarDeclaration(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final VarDeclarationContext varDeclaration() throws RecognitionException {
@@ -352,6 +373,11 @@ public class ajgan_bvclParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ajgan_bvclListener ) ((ajgan_bvclListener)listener).exitMethodDeclaration(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ajgan_bvclVisitor ) return ((ajgan_bvclVisitor<? extends T>)visitor).visitMethodDeclaration(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -451,6 +477,11 @@ public class ajgan_bvclParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ajgan_bvclListener ) ((ajgan_bvclListener)listener).exitType(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ajgan_bvclVisitor ) return ((ajgan_bvclVisitor<? extends T>)visitor).visitType(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final TypeContext type() throws RecognitionException {
@@ -525,6 +556,11 @@ public class ajgan_bvclParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ajgan_bvclListener ) ((ajgan_bvclListener)listener).exitStatement(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ajgan_bvclVisitor ) return ((ajgan_bvclVisitor<? extends T>)visitor).visitStatement(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -644,6 +680,11 @@ public class ajgan_bvclParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ajgan_bvclListener ) ((ajgan_bvclListener)listener).exitExpression(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ajgan_bvclVisitor ) return ((ajgan_bvclVisitor<? extends T>)visitor).visitExpression(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -833,6 +874,11 @@ public class ajgan_bvclParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ajgan_bvclListener ) ((ajgan_bvclListener)listener).exitIdentifier(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ajgan_bvclVisitor ) return ((ajgan_bvclVisitor<? extends T>)visitor).visitIdentifier(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
