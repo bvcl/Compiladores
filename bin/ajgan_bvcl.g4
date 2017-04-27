@@ -16,7 +16,7 @@ statement:'{' ( statement )* '}'|'if' '(' expression ')' statement 'else' statem
 
 expression:expression ( '&&' | '<' | '+' | '-' | '*' ) expression|expression '[' expression ']'|expression '.' 'length'|expression '.' identifier '(' ( expression ( ',' expression )* )? ')'|<INTEGER_LITERAL>|'true'|'false'|identifier|'this'|'new' 'int' '[' expression ']'|'new' identifier '(' ')'|'!' expression|'(' expression ')';
 
-identifier:<IDENTIFIER>;
+identifier: IDENTIFIER;
 
 IDENTIFIER: ('_' | [A-Za-z])('_'|([A-Za-z] | [0-9]))*;
 INTEGER_LITERAL: [0] | ([1-9]([0-9])*);
