@@ -154,13 +154,87 @@ public class AjganBvclVisitor extends ajgan_bvclBaseVisitor<Object> {
 		}
 		return type;
 	}
+	
 	//falta fazer esse visitExpression
 	public Object visitExpression(ajgan_bvclParser.ExpressionContext ctx) {
 		System.out.println("Expression");
 		Exp exp = null;
+		if(ctx.getChild(0).toString().equals("true")){
+			System.out.println("true");
+			exp = new True();
+		}
+		else if(ctx.getChild(0).toString().equals("false")){
+			System.out.println("false");
+			exp = new False();
+		}
+		else if(ctx.getChild(0).toString().equals("this")){
+			System.out.println("this");
+			exp = new This();
+		}
+		else if(ctx.getChild(0).toString().equals("!")){
+			System.out.println("! expression");
+			exp = new Not((Exp) this.visit(ctx.expression(0)));	
+		}
+		else if(ctx.getChild(0).toString().equals("(")){
+			System.out.println("(expression)");
+			exp =(Exp)this.visit(ctx.expression(0));	
+		}
+		else if(ctx.getChild(0).toString().equals("new")){
+			if(ctx.getChild(1).toString().equals("int")){
+				System.out.println("new int [expression] ");
+				exp = new NewArray((Exp) this.visit(ctx.expression(0)));
+			}
+			else{
+				System.out.println("new identifier()");
+				exp = new NewObject(new Identifier(ctx.identifier().getText()));
+			}
+		}
+		else if(ctx.INTEGER_LITERAL()!=null){
+			exp = new IntegerLiteral(Integer.parseInt(ctx.INTEGER_LITERAL().getText()));
+		}
+		else if(ctx.expression()==null){
+			System.out.println("identifier");
+			exp = new IdentifierExp(ctx.identifier().getText());
+		}
+		else{
+			//casos que iniciam com expression
+			if(ctx.getChild(1).toString().equals("[")){
+				System.out.println("expression [expression]");
+				Exp e = (Exp) this.visit(ctx.expression(0));
+				Exp e2 = (Exp) this.visit(ctx.expression(1));
+				exp = new ArrayLookup(e, e2);
+			}
+			else if(ctx.getChild(1).toString().equals(".")){
+				if(ctx.getChild(2).toString().equals("length")){
+					System.out.println("expression.lenght");
+					exp = new ArrayLength((Exp) this.visit(ctx.expression(0)));
+				}
+				else{
+					System.out.println("expression.identifier((expression ( ',' expression )* )?)");
+					ExpList eList = new ExpList();
+					
+					for (ajgan_bvclParser.ExpressionContext expr : ctx.expression()) {
+						eList.addElement((Exp) this.visit(expr));
+					}
+					Identifier id = new Identifier(ctx.identifier().getText());
+				    
+					
+					
+					
+				}
+			}
+			else{
+				
+			}
+		}
+		
+		
 		return exp;
 	}
-	
+	//expression:
+		//expression ( '&&' | '<' | '+' | '-' | '*' ) expression
+		//|expression '.' identifier '(' ( expression ( ',' expression )* )? ')'
+
 	
 	
 

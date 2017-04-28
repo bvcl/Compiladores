@@ -660,6 +660,7 @@ public class ajgan_bvclParser extends Parser {
 	}
 
 	public static class ExpressionContext extends ParserRuleContext {
+		public TerminalNode INTEGER_LITERAL() { return getToken(ajgan_bvclParser.INTEGER_LITERAL, 0); }
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
@@ -714,6 +715,7 @@ public class ajgan_bvclParser extends Parser {
 				break;
 			case 2:
 				{
+				setState(160); match(INTEGER_LITERAL);
 				}
 				break;
 			case 3:
@@ -818,8 +820,8 @@ public class ajgan_bvclParser extends Parser {
 						setState(195); identifier();
 						setState(196); match(T__18);
 						setState(205);
-						switch ( getInterpreter().adaptivePredict(_input,13,_ctx) ) {
-						case 1:
+						_la = _input.LA(1);
+						if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__32) | (1L << T__31) | (1L << T__18) | (1L << T__16) | (1L << T__14) | (1L << T__5) | (1L << IDENTIFIER) | (1L << INTEGER_LITERAL))) != 0)) {
 							{
 							setState(197); expression(0);
 							setState(202);
@@ -837,8 +839,8 @@ public class ajgan_bvclParser extends Parser {
 								_la = _input.LA(1);
 							}
 							}
-							break;
 						}
+
 						setState(207); match(T__2);
 						}
 						break;
@@ -967,7 +969,7 @@ public class ajgan_bvclParser extends Parser {
 		"\7\16\2\2\u009a\u009b\5\20\t\2\u009b\u009c\7\n\2\2\u009c\u009e\3\2\2\2"+
 		"\u009dt\3\2\2\2\u009d|\3\2\2\2\u009d\u0084\3\2\2\2\u009d\u008a\3\2\2\2"+
 		"\u009d\u0090\3\2\2\2\u009d\u0095\3\2\2\2\u009e\17\3\2\2\2\u009f\u00a0"+
-		"\b\t\1\2\u00a0\u00a1\7 \2\2\u00a1\u00b7\5\20\t\4\u00a2\u00b7\3\2\2\2\u00a3"+
+		"\b\t\1\2\u00a0\u00a1\7 \2\2\u00a1\u00b7\5\20\t\4\u00a2\u00b7\7\'\2\2\u00a3"+
 		"\u00b7\7\6\2\2\u00a4\u00b7\7\27\2\2\u00a5\u00b7\5\22\n\2\u00a6\u00b7\7"+
 		"\25\2\2\u00a7\u00a8\7\5\2\2\u00a8\u00a9\7\22\2\2\u00a9\u00aa\7\33\2\2"+
 		"\u00aa\u00ab\5\20\t\2\u00ab\u00ac\7\36\2\2\u00ac\u00b7\3\2\2\2\u00ad\u00ae"+
