@@ -21,4 +21,7 @@ public class ExpList {
    public int size() { 
       return list.size(); 
    }
+   public void removeElement(int i){
+	   list.remove(i);
+   }
 }

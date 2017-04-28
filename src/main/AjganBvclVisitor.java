@@ -99,7 +99,6 @@ public class AjganBvclVisitor extends ajgan_bvclBaseVisitor<Object> {
 		return var;
 	}
 	
-	//Não sei se esse visitMethodDeclaration está correto
 	public Object visitMethodDeclaration(ajgan_bvclParser.MethodDeclarationContext ctx) {		
 		MethodDecl md = null;
 		int c =0;
@@ -155,7 +154,6 @@ public class AjganBvclVisitor extends ajgan_bvclBaseVisitor<Object> {
 		return type;
 	}
 	
-	//falta fazer esse visitExpression
 	public Object visitExpression(ajgan_bvclParser.ExpressionContext ctx) {
 		System.out.println("Expression");
 		Exp exp = null;
@@ -217,25 +215,40 @@ public class AjganBvclVisitor extends ajgan_bvclBaseVisitor<Object> {
 						eList.addElement((Exp) this.visit(expr));
 					}
 					Identifier id = new Identifier(ctx.identifier().getText());
-				    
-					
-					
-					
+				    Exp e = eList.elementAt(0);
+					eList.removeElement(0);
+					exp = new Call(e,id, eList);			
 				}
 			}
 			else{
-				
+				//casos com os operadores
+				Exp e = (Exp) this.visit(ctx.expression(0));
+				Exp e2 = (Exp) this.visit(ctx.expression(1));
+				switch (ctx.getChild(1).toString()) {
+					case "&&":
+						System.out.println("expression && expression");
+						exp = new And(e, e2);
+						break;
+					case "<":
+						System.out.println("expression < expression");
+						exp = new LessThan(e, e2);
+						break;
+					case "+":
+						System.out.println("expression + expression");
+						exp = new Plus(e, e2);
+						break;
+					case "-":
+						System.out.println("expression - expression");
+						exp = new Minus(e, e2);
+						break;
+					case "*":
+						System.out.println("expression * expression");
+						exp = new Times(e, e2);
+						break;
+				}
 			}
 		}
-		
-		
 		return exp;
 	}
-	//expression:
-		//expression ( '&&' | '<' | '+' | '-' | '*' ) expression
-		//|expression '.' identifier '(' ( expression ( ',' expression )* )? ')'
-
 	
-	
-
 }
