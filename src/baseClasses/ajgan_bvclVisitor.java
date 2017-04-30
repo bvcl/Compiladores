@@ -1,5 +1,5 @@
-package baseClasses;
 // Generated from ajgan_bvcl.g4 by ANTLR 4.4
+package baseClasses;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 

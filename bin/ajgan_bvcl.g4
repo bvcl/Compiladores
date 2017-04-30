@@ -23,5 +23,5 @@ INTEGER_LITERAL: [0] | ([1-9]([0-9])*);
 
 ESPACOS: [ \r\n\t] ->skip;
 COMENTARIO_LINHA: '//'(~'\n')* ->skip;
-COMENTARIO_MULTILINHA: ('/*'(.)*?'*/') ->skip;
+COMENTARIO_MULTILINHA: '/*' .*? '*/' -> skip;
 

@@ -41,21 +41,25 @@ public class AjganBvclVisitor extends ajgan_bvclBaseVisitor<Object> {
 			stat = new Block(stList);
 		}
 		else if(ctx.getChild(0).toString().equals("if")){
+			System.out.println("if");
 			Exp e = (Exp) this.visit(ctx.expression(0));
 			Statement s1 = (Statement) this.visit(ctx.statement(0));
 			Statement s2 = (Statement) this.visit(ctx.statement(1));
 			stat = new If(e, s1, s2);		
 		}
 		else if(ctx.getChild(0).toString().equals("while")){
+			System.out.println("while");
 			Exp e = (Exp) this.visit(ctx.expression(0));
 			Statement s1 = (Statement) this.visit(ctx.statement(0));	
 			stat = new While(e, s1);	
 		}
 		else if(ctx.getChild(0).toString().equals("System.out.println")){
+			System.out.println("print");
 			Exp e = (Exp) this.visit(ctx.expression(0));
 			stat = new Print(e);
 		}
 		else if(ctx.getChild(1).toString().equals("=")){
+			System.out.println("equal");
 			Identifier id = new Identifier(ctx.getChild(0).getText());
 			Exp e = (Exp) this.visit(ctx.expression(0));
 			stat = new Assign(id, e);
@@ -70,6 +74,7 @@ public class AjganBvclVisitor extends ajgan_bvclBaseVisitor<Object> {
 	}
 	
 	public Object visitClassDeclaration(ajgan_bvclParser.ClassDeclarationContext ctx) {
+		System.out.println("Visited Class Declaration");
 		Identifier id = new Identifier(ctx.getChild(1).getText());
 		Identifier id2 = null;
 		ClassDecl cd = null;
@@ -95,6 +100,7 @@ public class AjganBvclVisitor extends ajgan_bvclBaseVisitor<Object> {
 	public Object visitVarDeclaration(ajgan_bvclParser.VarDeclarationContext ctx) {		
 		Type t = (Type)this.visit(ctx.type());
 		Identifier id = new Identifier(ctx.identifier().getText());
+		System.out.println(id);
 		VarDecl var = new VarDecl(t,id);
 		return var;
 	}
@@ -104,6 +110,7 @@ public class AjganBvclVisitor extends ajgan_bvclBaseVisitor<Object> {
 		int c =0;
 		Type t = (Type)this.visit(ctx.type(c));
 		Identifier id = new Identifier(ctx.identifier(c).getText());
+		System.out.println(id);		
 		c++;
 		int count = 4;
 		FormalList fList = new FormalList();
@@ -111,6 +118,7 @@ public class AjganBvclVisitor extends ajgan_bvclBaseVisitor<Object> {
 		while(!ctx.getChild(count).toString().equals(")")){
 			Type t2 = (Type)this.visit(ctx.type(c));
 			Identifier id2 = new Identifier(ctx.identifier(c).getText());
+			System.out.println(id2);
 			Formal f = new Formal(t2,id2);
 			fList.addElement(f);			
 			c++;
@@ -139,16 +147,20 @@ public class AjganBvclVisitor extends ajgan_bvclBaseVisitor<Object> {
 		Type type = null;
 		if (ctx.getChild(0).toString().equals("int")) {
 			if(ctx.getChildCount() > 1){
+				System.out.print("int []");
 				type = new IntArrayType();
 			}
 			else{
+				System.out.print("int ");
 				type = new IntegerType();
 			}
 		} 
 		else if (ctx.getChild(0).toString().equals("boolean")) {
+			System.out.print("boolean");
 			type = new BooleanType();
 		} 
 		else {
+			System.out.print(ctx.getText());
 			type = new IdentifierType(ctx.getText());
 		}
 		return type;
@@ -183,15 +195,15 @@ public class AjganBvclVisitor extends ajgan_bvclBaseVisitor<Object> {
 				exp = new NewArray((Exp) this.visit(ctx.expression(0)));
 			}
 			else{
-				System.out.println("new identifier()");
+				System.out.println("new"+ctx.identifier().getText());
 				exp = new NewObject(new Identifier(ctx.identifier().getText()));
 			}
 		}
 		else if(ctx.INTEGER_LITERAL()!=null){
 			exp = new IntegerLiteral(Integer.parseInt(ctx.INTEGER_LITERAL().getText()));
 		}
-		else if(ctx.expression()==null){
-			System.out.println("identifier");
+		else if(ctx.getChild(0).getClass().equals(ajgan_bvclParser.IdentifierContext.class)){
+			System.out.println("identifier:"+ctx.identifier().getText());
 			exp = new IdentifierExp(ctx.identifier().getText());
 		}
 		else{
@@ -211,7 +223,7 @@ public class AjganBvclVisitor extends ajgan_bvclBaseVisitor<Object> {
 					System.out.println("expression.identifier((expression ( ',' expression )* )?)");
 					ExpList eList = new ExpList();
 					
-					for (ajgan_bvclParser.ExpressionContext expr : ctx.expression()) {
+					for (ajgan_bvclParser.ExpressionContext expr : ctx.expression()) {	
 						eList.addElement((Exp) this.visit(expr));
 					}
 					Identifier id = new Identifier(ctx.identifier().getText());
