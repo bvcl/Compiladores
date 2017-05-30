@@ -25,6 +25,12 @@ public class Main {
 		Program program = (Program) visitor.visit(tree);
 		program.accept(new PrettyPrintVisitor());
 
+		/*BuildSymbolTableVisitor stVis = new BuildSymbolTableVisitor();
+		//construindo tabela de símbolos
+		prog.accept(stVis); 
+		//fazendo a checagem de tipos
+		prog.accept(new TypeCheckVisitor(stVis.getSymbolTable())); */
+
 	}
 
 }
