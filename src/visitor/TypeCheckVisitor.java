@@ -45,7 +45,7 @@ public class TypeCheckVisitor implements TypeVisitor {
 	private Class currClass;
 	private Method currMethod;
 
-	TypeCheckVisitor(SymbolTable st) {
+	public TypeCheckVisitor(SymbolTable st) {
 		symbolTable = st;
 	}
 
@@ -62,6 +62,7 @@ public class TypeCheckVisitor implements TypeVisitor {
 	// Identifier i1,i2;
 	// Statement s;
 	public Type visit(MainClass n) {
+		currClass = symbolTable.getClass(n.i1.s);
 		n.i1.accept(this);
 		n.i2.accept(this);
 		n.s.accept(this);
@@ -72,6 +73,7 @@ public class TypeCheckVisitor implements TypeVisitor {
 	// VarDeclList vl;
 	// MethodDeclList ml;
 	public Type visit(ClassDeclSimple n) {
+		currClass = symbolTable.getClass(n.i.s);
 		n.i.accept(this);
 		for (int i = 0; i < n.vl.size(); i++) {
 			n.vl.elementAt(i).accept(this);
@@ -87,7 +89,9 @@ public class TypeCheckVisitor implements TypeVisitor {
 	// VarDeclList vl;
 	// MethodDeclList ml;
 	public Type visit(ClassDeclExtends n) {
+		currClass = symbolTable.getClass(n.i.s);
 		n.i.accept(this);
+		if (!(symbolTable.containsClass(n.j.s)))System.out.println("Error: Parent Class must exist");
 		n.j.accept(this);
 		for (int i = 0; i < n.vl.size(); i++) {
 			n.vl.elementAt(i).accept(this);
@@ -101,6 +105,7 @@ public class TypeCheckVisitor implements TypeVisitor {
 	// Type t;
 	// Identifier i;
 	public Type visit(VarDecl n) {
+		if (!(symbolTable.containsClass(n.t.toString()))) System.out.println("Error: Type must exist");			
 		n.t.accept(this);
 		n.i.accept(this);
 		return null;
@@ -132,6 +137,7 @@ public class TypeCheckVisitor implements TypeVisitor {
 	// Type t;
 	// Identifier i;
 	public Type visit(Formal n) {
+		if (!(symbolTable.containsClass(n.t.toString()))) System.out.println("Error: Type must exist");			
 		n.t.accept(this);
 		n.i.accept(this);
 		return null;
@@ -260,6 +266,9 @@ public class TypeCheckVisitor implements TypeVisitor {
 	// ExpList el;
 	//PARA DEPOIS N ENTENDI MTO BEM
 	public Type visit(Call n) {
+		
+		
+		
 		n.e.accept(this);
 		n.i.accept(this);
 		for (int i = 0; i < n.el.size(); i++) {
