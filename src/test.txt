@@ -22,7 +22,7 @@ class BT {
 	Tree root ;
 	boolean ntb ;
 	int nti ;
-
+	Pessoa p;
 	root = new Tree();
 	ntb = root.Init(16);
 	ntb = root.Print();
@@ -50,6 +50,26 @@ class BT {
 
 }
 
+class Pessoa{
+ int cpf;
+ 
+ public int getCpf(){
+ 	return cpf;
+ }
+ 
+}
+
+class Func extends Pessoa{
+ int numeroFunc;
+ Pessoa parente;
+ boolean b;
+ public Pessoa getParente(){
+ 	return parente;
+ }
+
+}
+
+
 class Tree{
     Tree left ;
     Tree right;
@@ -57,7 +77,6 @@ class Tree{
     boolean has_left ;
     boolean has_right ;
     Tree my_null ;
-
     // Initialize a node with a key value and no children
     public boolean Init(int v_key){
 	key = v_key ;
