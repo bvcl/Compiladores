@@ -23,9 +23,13 @@ class BT {
 	boolean ntb ;
 	int nti ;
 	Pessoa p;
+	boolean bl;
+	
 	root = new Tree();
 	ntb = root.Init(16);
 	ntb = root.Print();
+	bl = p.isPerson();
+	
 	System.out.println(100000000);
 	ntb = root.Insert(8) ;
 	ntb = root.Print();
@@ -44,7 +48,6 @@ class BT {
 	ntb = root.Delete(12);
 	ntb = root.Print();
 	System.out.println(root.Search(12));
-
 	return 0 ;
     }
 
@@ -55,6 +58,9 @@ class Pessoa{
  
  public int getCpf(){
  	return cpf;
+ }
+ public boolean isPerson(){
+ 	return true;
  }
  
 }

@@ -275,9 +275,30 @@ public class TypeCheckVisitor implements TypeVisitor {
 	// Identifier i;
 	// ExpList el;
 	//PARA DEPOIS N ENTENDI MTO BEM
-	public Type visit(Call n) {
-		
-		return null;
+	public Type visit(Call n) {	
+		Type tp = n.e.accept(this);
+		Method met = null;
+		if(tp instanceof IdentifierType){
+			Class c;
+			c = symbolTable.getClass(((IdentifierType)tp).s);
+			if(c == null){
+				System.out.println("Error: Type "+ ((IdentifierType)tp).s + " of object does not exist");
+			}
+			else{
+				met = c.getMethod(n.i.toString());
+				if(met==null)System.out.println("Method not found for class "+((IdentifierType)tp).s);
+				for(int i = 0; i < n.el.size(); i++){
+					if(!symbolTable.compareTypes(n.el.elementAt(i).accept(this), met.getParamAt(i).type())){
+						System.out.println("Error: Type of parameter "+n.el.elementAt(i).toString()+" does not match method declaration");
+					}
+				}
+			}
+		} 
+		else {
+			System.out.println("Error: Type cannot call methods");
+		}
+		if(met!=null)return met.type();
+		else return null;
 	}
 
 	// int i;
